@@ -14,7 +14,7 @@ body {
 }
 
 .overflow {
-    /*overflow-y: hidden;*/
+    overflow-y: hidden;
     /*padding-right: 15px;*/
 }
 
@@ -658,7 +658,7 @@ a {
     height: 50px;
 }
 
-.swiper-slide__image  {
+.swiper-slide__image {
     max-width: 100%;
     height: 100%;
     width: 100%;
@@ -707,7 +707,8 @@ a {
     border-radius: 0;
     margin: 0 4px;
     display: block;
-    width: 75px;
+    max-width: 75px;
+    width: 100%;
     height: 4px;
     background: #7c01c7;
 }
@@ -964,6 +965,113 @@ a {
         right: -210px;
     }
 
+    .work__plan-item {
+        max-width: 49.99999%;
+    }
+
+    .portfolio .swiper-slide {
+        border-radius: 25px;
+        max-width: 100%;
+        height: 500px;
+    }
+
+    .slider-button-next {
+        right: 60px;
+
+    }
+
+    .slider-button-prev {
+        left: 60px;
+    }
+
+    .menu__burger {
+        display: block;
+        z-index: 1000;
+    }
+
+    .menu__burger span {
+        transition: transform .1s linear;
+    }
+
+    .menu__burger.active span:nth-child(1) {
+        transform: rotate(45deg);
+        margin: -3px 0 0 0;
+    }
+
+    .menu__burger.active span:nth-child(2) {
+        display: none;
+    }
+
+    .menu__burger.active span:nth-child(3) {
+        transform: rotate(-45deg);
+        margin: -3px 0 0 0;
+    }
+
+    .header__nav {
+        transform: translateX(100%);
+        background-color: #950ce8;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+
+        z-index: 111;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        transition: transform .2s ease-in-out;
+    }
+
+    .header__nav.active {
+        transform: translateX(0%);
+    }
+
+
+    .header__nav .mobile {
+        display: block;
+    }
+
+    .header__nav ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header__nav ul li {
+        max-width: 100%;
+        width: 100%;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .header__nav-link {
+        display: inline-block;
+        padding: 15px 35px;
+        border: none;
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 700;
+        background-color: var(--primary-color);
+        border-radius: 15px;
+        cursor: pointer;
+        transition: box-shadow .2s ease-in;
+    }
+
+
+    .header__consult {
+        display: none;
+    }
+
+    .header__nav-link {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+
     .about__crm-list_item:nth-child(2n):after {
         z-index: -4;
         content: '';
@@ -1015,113 +1123,9 @@ a {
         margin-top: 30px;
     }
 
-    .work__plan-item {
-        max-width: 49.99999%;
+    .btn + .btn {
+        margin-left: 0px;
     }
-
-    .portfolio .swiper-slide {
-        border-radius: 25px;
-        max-width: 100%;
-        height: 500px;
-    }
-
-    .slider-button-next {
-        right: 60px;
-
-    }
-
-    .slider-button-prev {
-        left: 60px;
-    }
-
-    .menu__burger {
-        display: block;
-        z-index: 1000;
-    }
-
-    .menu__burger span {
-        transition: transform .1s linear;
-    }
-
-    .menu__burger.active span:nth-child(1) {
-        transform: rotate(45deg);
-        margin: -3px 0 0 0;
-    }
-
-    .menu__burger.active span:nth-child(2) {
-        display: none;
-    }
-
-    .menu__burger.active span:nth-child(3) {
-        transform: rotate(-45deg);
-        margin: -3px 0 0 0;
-    }
-
-    .header__nav {
-        transform: translateY(-100%);
-        background-color: #950ce8;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-
-        z-index: 111;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-
-        transition: transform .3s linear;
-    }
-
-    .header__nav.active {
-        transform: translateY(0%);
-    }
-
-
-    .header__nav .mobile {
-        display: block;
-    }
-
-    .header__nav ul {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .header__nav ul li {
-        max-width: 100%;
-        width: 100%;
-        margin-bottom: 15px;
-        text-align: center;
-    }
-
-
-    .header__nav-link {
-        display: inline-block;
-        padding: 15px 35px;
-        border: none;
-        color: #ffffff;
-        text-decoration: none;
-        font-weight: 700;
-        background-color: var(--primary-color);
-        border-radius: 15px;
-        cursor: pointer;
-        transition: box-shadow .2s ease-in;
-    }
-
-
-    .header__consult {
-        display: none;
-    }
-
-    .header__nav-link {
-        display: block;
-    }
-}
-
-@media (max-width: 768px) {
 
     .slider-button-next {
         right: 20px;
@@ -1144,8 +1148,25 @@ a {
 }
 
 @media (max-width: 640px) {
+
+    .modal__inner iframe {
+        height: 80vh;
+    }
+
+    .portfolio__slider {
+        padding: 0 15px;
+    }
+
     .intro__title {
         font-size: 24px;
+    }
+
+    .form__input {
+        font-size: 16px;
+    }
+
+    .work__plan-item__list {
+        font-size: 16px;
     }
 
     .intro__subtitle {
@@ -1154,6 +1175,10 @@ a {
 
     .intro__links {
         flex-direction: column;
+    }
+
+    .about__crm-list_item {
+        max-width: 100%;
     }
 
     .btn + .btn {
@@ -1174,8 +1199,10 @@ a {
         margin-bottom: 60px;
     }
 
-    .about__crm-list_item {
-        max-width: 100%;
+    .about__crm-text {
+        padding-left: 54px;
+        font-weight: 500;
+        font-size: 14px;
     }
 
     .fields {
@@ -1213,6 +1240,7 @@ a {
     }
 
     .section__title {
+        margin-bottom: 60px;
         font-size: 30px;
     }
 
@@ -1269,4 +1297,19 @@ a {
     }
 }
 
+@media (max-width: 368px) {
+    .about__crm-count_num {
+        font-size: 80px;
+    }
 
+    .about__crm-list_item {
+        max-width: 100%;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    .about__crm-item__title {
+        padding-top: 10px;
+        padding-left: 35px;
+    }
+}

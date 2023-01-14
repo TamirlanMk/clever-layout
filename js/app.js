@@ -99,8 +99,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Menu For Mobile And Smooth scroll
   menuBurger.addEventListener('click', (e) => {
-    menuBurger.classList.toggle('active');
-    menu.classList.toggle('active');
+
+    if (!menuBurger.classList.contains('active')) {
+      menuBurger.classList.add('active');
+      menu.classList.add('active');
+      // menu.classList.add('animate__backInDown');
+      // menu.classList.remove('animate__bounceOutUp');
+    } else {
+      menuBurger.classList.remove('active');
+      menu.classList.remove('active');
+      // menu.classList.add('animate__bounceOutUp');
+    }
+
+
     document.body.classList.toggle('overflow')
   })
 
