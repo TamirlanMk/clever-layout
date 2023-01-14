@@ -31,6 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
         slidesPerView: 'auto',
         spaceBetween: 30
       }
+      , 1170: {
+        slidesPerView: 'auto',
+        spaceBetween: 30
+      }
     }
 
   });
@@ -82,12 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (hasEmpty) {
       return alert('Заполните все поля формы!');
     }
-
-    for (let [key, value] of formData) {
-      console.log(key + ' - ' + value)
+    for (let value of formData.values()) {
+      console.log(`Key: ${value}`)
     }
-
-
+    return console.log()
   })
 
   // Menu
@@ -127,5 +129,54 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     });
   })
+
+  // Modal with youtube video from swiper slider
+  const modal = document.querySelector('#slider__modal')
+  const modalContent = document.querySelector('#slider__modal .modal__inner')
+  const modalCloseBtn = document.querySelector('#slider__modal .modal__close')
+  const slidesWithYoutube = document.querySelectorAll('.swiper-slide[data-youtube-id]')
+
+  modal.addEventListener('click', (e) => {
+    let check = e.target.closest('.modal__inner')
+
+    if (!check) {
+      closeModal()
+    }
+
+  })
+
+  slidesWithYoutube.forEach(slide => {
+    slide.addEventListener('click', (e) => {
+      let youTubeVideoId = e.target.getAttribute('data-youtube-id');
+
+      if (!e.target.classList.contains('swiper-slide') && youTubeVideoId == null) {
+        youTubeVideoId = e.target.parentElement.getAttribute('data-youtube-id')
+      }
+
+      let iframe = document.createElement('iframe');
+
+      iframe.setAttribute('src', `https://www.youtube.com/embed/${youTubeVideoId}`)
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share')
+      iframe.setAttribute('width', 800)
+      iframe.setAttribute('height', 600)
+      iframe.setAttribute('title', "Rick Astley - Never Gonna Give You Up (Official Music Video)")
+      iframe.setAttribute('frameBorder', 0)
+      iframe.setAttribute('allowFullScreen', true)
+      iframe.classList.add('iframe__modal')
+
+      modalContent.appendChild(iframe);
+      modal.classList.add('active');
+      document.body.classList.add('overflow')
+    });
+  });
+
+  modalCloseBtn.addEventListener('click', closeModal)
+
+  function closeModal() {
+    let iframe = document.querySelector('.iframe__modal');
+    iframe.remove()
+    modal.classList.remove('active');
+    document.body.classList.remove('overflow');
+  }
 
 });
