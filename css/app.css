@@ -1041,7 +1041,11 @@ a {
     .menu__burger span {
         transition: transform .1s linear;
     }
-
+    .menu__burger.active {
+        position: fixed;
+        top: 57px;
+        right: 22px;
+    }
     .menu__burger.active span:nth-child(1) {
         transform: rotate(45deg);
         margin: -3px 0 0 0;
@@ -1064,7 +1068,7 @@ a {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        position: absolute;
+        position: fixed;
 
         z-index: 111;
         top: 0;
