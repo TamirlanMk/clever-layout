@@ -1226,6 +1226,16 @@ a {
     .overflow {
         overflow-y: hidden;
     }
+    
+    .form__footer {
+        flex-direction: column;
+    }
+
+    .validation {
+        margin-top: 20px;
+        max-width: 100%;
+        font-size: 14px;
+    }
 
     .modal__inner iframe {
         height: 80vh;
