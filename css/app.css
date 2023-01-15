@@ -1236,6 +1236,11 @@ a {
         max-width: 100%;
         font-size: 14px;
     }
+    
+    .btn--submit::after {
+        top: 150%;
+        left: 50%;
+    }
 
     .modal__inner iframe {
         height: 80vh;
