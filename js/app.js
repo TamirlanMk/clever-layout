@@ -43,54 +43,92 @@ document.addEventListener('DOMContentLoaded', () => {
   // Form Validation
   const formInputs = document.querySelectorAll('.form__input');
   const form = document.querySelector('.consult__form');
+  const btnSubmit = document.querySelector('#btn__submit');
+  const validationText = document.querySelector('#validation');
 
   // Add Class with gradient border for Form Group
   formInputs.forEach((input, i) => {
 
     input.addEventListener('focus', (e) => {
-      let parent = e.target.parentElement;
-      let addClassInput = i % 2 === 0 ? 'active-odd' : 'active-even'
-      let errorClassInput = i % 2 === 0 ? 'error-odd' : 'error-even'
+      let parent = e.target.closest('.form__group');
+      let successClassInput = i % 2 === 0 ? 'active-odd' : 'active-even';
+      let errorClassInput = i % 2 === 0 ? 'error-odd' : 'error-even';
 
       if (parent.classList.contains(errorClassInput)) {
-        parent.classList.remove(errorClassInput)
+        parent.classList.remove(errorClassInput);
       }
 
-      parent.classList.add(addClassInput)
+      parent.classList.add(successClassInput);
     });
 
     // Remove Class with gradient border for Form Group
     input.addEventListener('focusout', (e) => {
-      let parent = e.target.parentElement;
-      let addClassInput = i % 2 === 0 ? 'active-odd' : 'active-even'
-      let errorClassInput = i % 2 === 0 ? 'error-odd' : 'error-even'
+      let parent = e.target.closest('.form__group');
+      let successClassInput = i % 2 === 0 ? 'active-odd' : 'active-even';
+      let errorClassInput = i % 2 === 0 ? 'error-odd' : 'error-even';
 
       if (e.target.value === '') {
-        parent.classList.remove(addClassInput)
+        parent.classList.remove(successClassInput)
         parent.classList.add(errorClassInput)
       }
     })
   })
 
   form.addEventListener('submit', (e) => {
-    e.preventDefault()
+    e.preventDefault();
     let hasEmpty = false;
     let formData = new FormData(form);
+    validationText.innerHTML = '';
 
-    formInputs.forEach((input) => {
+    // Check Inputs value
+    formInputs.forEach((input, i) => {
+      let errorClassInput = i % 2 === 0 ? 'error-odd' : 'error-even';
+
       if (input.value === '') {
+        input.closest('.form__group').classList.add(errorClassInput);
         hasEmpty = true;
       }
     })
 
+    // If Empty set error for validation
     if (hasEmpty) {
-      return alert('Заполните все поля формы!');
+      changeValidationStatus('Заполните отмеченые поля!', 'error')
+      return 0;
     }
-    for (let value of formData.values()) {
-      console.log(`Key: ${value}`)
-    }
-    return console.log()
-  })
+
+    btnSubmit.classList.add('btn--submit');
+
+    setTimeout(function () {
+      for (let value of formData.values()) {
+        console.log(`Key: ${value}`);
+      }
+      clearInputs(formInputs);
+      btnSubmit.classList.remove('btn--submit');
+      changeValidationStatus('Заявка оправлена!', 'success')
+    }, 2000)
+
+    return console.log("Success")
+  });
+
+  function changeValidationStatus(content, validClass) {
+    validationText.classList.add(validClass);
+    validationText.innerHTML = content;
+
+    setTimeout(function () {
+      validationText.innerHTML = ''
+      validationText.classList.remove(validClass)
+    }, 5000);
+  }
+
+  function clearInputs(inputs) {
+    inputs.forEach((input, i) => {
+      let parent = input.closest('.form__group');
+      let successClassInput = i % 2 === 0 ? 'active-odd' : 'active-even';
+
+      input.value = '';
+      parent.classList.remove(successClassInput)
+    });
+  }
 
   // Menu
   const menuBurger = document.querySelector('.menu__burger');
@@ -100,19 +138,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // Menu For Mobile And Smooth scroll
   menuBurger.addEventListener('click', (e) => {
 
+    if (menu.classList.contains('back-animate')) return 0;
+
     if (!menuBurger.classList.contains('active')) {
       menuBurger.classList.add('active');
       menu.classList.add('active');
-      // menu.classList.add('animate__backInDown');
-      // menu.classList.remove('animate__bounceOutUp');
     } else {
       menuBurger.classList.remove('active');
-      menu.classList.remove('active');
-      // menu.classList.add('animate__bounceOutUp');
+      menu.classList.add('back-animate');
+      setTimeout(() => {
+        menu.classList.remove('active');
+        menu.classList.remove('back-animate');
+      }, 200)
     }
 
-
-    document.body.classList.toggle('overflow')
+    document.body.classList.toggle('overflow');
   })
 
   menuLinks.forEach((link) => {
@@ -170,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
       iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share')
       iframe.setAttribute('width', 800)
       iframe.setAttribute('height', 600)
-      iframe.setAttribute('title', "Rick Astley - Never Gonna Give You Up (Official Music Video)")
       iframe.setAttribute('frameBorder', 0)
       iframe.setAttribute('allowFullScreen', true)
       iframe.classList.add('iframe__modal')

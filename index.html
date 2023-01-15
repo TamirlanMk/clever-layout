@@ -17,9 +17,7 @@
     <title>Clever CRM</title>
 </head>
 <body>
-
 <div class="main">
-
     <div id="intro" class="intro">
         <div class="container">
             <div class="intro__inner">
@@ -584,7 +582,7 @@
                     <form class="consult__form" method="post" action="/">
 
                         <div class="form__group">
-                            <input name="name" type="text" class="form__input" placeholder="Имя">
+                            <input name="name" type="text" class="form__input" placeholder="Имя:">
                         </div>
 
                         <div class="form__group">
@@ -598,7 +596,13 @@
                         <div class="form__group">
                             <input name="company_name" type="text" class="form__input" placeholder="Компания:">
                         </div>
-                        <input type="submit" class="btn btn--border-primary">
+                        <div class="form__footer">
+                            <button type="submit" id="btn__submit" class="btn btn--border-primary">
+                                Подать заявку
+                            </button>
+                            <div class="validation" id="validation">
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="row">

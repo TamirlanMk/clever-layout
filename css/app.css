@@ -14,7 +14,7 @@ body {
 }
 
 .overflow {
-    overflow-y: hidden;
+    /*overflow-y: hidden;*/
     /*padding-right: 15px;*/
 }
 
@@ -89,6 +89,27 @@ a {
     -moz-box-shadow: 0px 0px 33px 10px rgba(74, 214, 135, 0.2);
     box-shadow: 0px 0px 33px 10px rgba(74, 214, 135, 0.2);
 
+}
+
+.btn--submit {
+    position: relative;
+    transition: 1s;
+}
+
+.btn--submit::after {
+    content: '';
+    display: block;
+    position: absolute;
+
+    background-size: cover;
+    background: url("../assets/images/preloder.svg") no-repeat center;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+
+    top: 50%;
+    left: 120%;
+    transform: translate(-50%, -50%);
 }
 
 /* Intro Section */
@@ -811,6 +832,35 @@ a {
     color: #BFBFBF;
 }
 
+.validation {
+    position: relative;
+    max-width: 50%;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 1s;
+}
+
+.validation.error {
+    color: #cb1063;
+}
+
+.validation.success {
+    color: #4ad687;
+}
+
+.form__footer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
 /* Footer */
 
 .footer {
@@ -911,7 +961,6 @@ a {
     margin-bottom: -4px;
 }
 
-
 .modal__inner {
     position: relative;
 }
@@ -1008,10 +1057,10 @@ a {
     }
 
     .header__nav {
-        transform: translateX(100%);
+        transform: translateX(150%);
         background-color: #950ce8;
 
-        display: flex;
+        display: none;
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -1022,12 +1071,34 @@ a {
         left: 0;
         right: 0;
         bottom: 0;
+        animation: fadeIn .2s linear;
+        animation-fill-mode: both;
+    }
 
-        transition: transform .2s ease-in-out;
+    .header__nav.back-animate {
+        animation: fadeOut .2s linear;
+        animation-fill-mode: both;
+    }
+
+    @keyframes fadeOut {
+        0% {
+            transform: translateX(0%);
+        }
+        100% {
+            transform: translateX(150%);
+        }
+    }
+    @keyframes fadeIn {
+        0% {
+            transform: translateX(150%);
+        }
+        100% {
+            transform: translateX(0%);
+        }
     }
 
     .header__nav.active {
-        transform: translateX(0%);
+        display: flex;
     }
 
 
@@ -1148,6 +1219,9 @@ a {
 }
 
 @media (max-width: 640px) {
+    .overflow {
+        overflow-y: hidden;
+    }
 
     .modal__inner iframe {
         height: 80vh;
