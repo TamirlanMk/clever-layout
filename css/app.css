@@ -787,9 +787,9 @@ a {
 .form__input {
     max-width: 100%;
     width: 100%;
-    border-radius: 15px;
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px;
+    border-radius: 12px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
     padding: 12px 22px;
     background-color: #33044F;
     font-weight: 500;
