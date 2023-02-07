@@ -172,6 +172,10 @@ a {
     display: block;
 }
 
+.logo a {
+    display: inline-block;
+}
+
 .logo img {
     max-width: 200px;
     width: 100%;
@@ -247,7 +251,7 @@ a {
     white-space: nowrap;
     transition: transform .2s linear;
     will-change: transform;
-    animation: marquee-f 60s linear infinite;
+    animation: marquee-f 80s linear infinite;
 }
 
 .line span {
@@ -671,6 +675,12 @@ a {
     height: 100px;
     background: rgba(124, 1, 199, 0.5);
     border-radius: 50%;
+
+    transition: background .2s linear;
+}
+
+.swiper-slide:hover .image__play {
+    background: rgba(124, 1, 199, 0.73);
 }
 
 .image__play svg {
@@ -699,20 +709,30 @@ a {
     top: 50%;
     width: 60px;
     height: 60px;
-    transform: translateY(-50%);
     z-index: 1000;
     cursor: pointer;
+
+    transition: opacity .2s ease-in-out;
 }
 
 .slider-button-prev {
+    transform: translateY(-50%);
     left: 120px;
     right: auto;
+    opacity: .7;
+
 }
 
 .slider-button-next {
     transform: scale(-1) translateY(50%);
     right: 120px;
     left: auto;
+    opacity: .7;
+}
+
+.slider-button-next:hover,
+.slider-button-prev:hover {
+    opacity: 1;
 }
 
 .slider-pagination {
@@ -777,7 +797,6 @@ a {
     width: 100%;
     padding: 3px;
     background: linear-gradient(90deg, rgba(124, 1, 199, 0), #7c01c7);
-
 }
 
 .form__group:nth-child(odd) {
@@ -868,15 +887,18 @@ a {
     background: rgba(124, 1, 199, 0.25);
 }
 
+.footer a:hover {
+    text-decoration: none;
+}
+
 .footer__inner {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
 }
 
 .footer__col {
-    padding-right: 100px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -884,6 +906,7 @@ a {
 }
 
 .footer__title {
+    margin-top: 0;
     margin-bottom: 20px;
     font-weight: 700;
     font-size: 20px;
@@ -1005,7 +1028,6 @@ a {
 }
 
 @media (max-width: 1024px) {
-
     .line span {
         font-size: 20px;
     }
@@ -1035,17 +1057,20 @@ a {
 
     .menu__burger {
         display: block;
+        padding: 20px 0;
         z-index: 1000;
     }
 
     .menu__burger span {
         transition: transform .1s linear;
     }
+
     .menu__burger.active {
         position: fixed;
         top: 57px;
         right: 22px;
     }
+
     .menu__burger.active span:nth-child(1) {
         transform: rotate(45deg);
         margin: -3px 0 0 0;
@@ -1155,7 +1180,7 @@ a {
         position: absolute;
         background-size: contain;
         top: -60px;
-        left: 0px;
+        left: 0;
         max-width: 100%;
         width: 100%;
     }
@@ -1199,7 +1224,7 @@ a {
     }
 
     .btn + .btn {
-        margin-left: 0px;
+        margin-left: 0;
     }
 
     .slider-button-next {
@@ -1226,7 +1251,7 @@ a {
     .overflow {
         overflow-y: hidden;
     }
-    
+
     .form__footer {
         flex-direction: column;
     }
@@ -1236,7 +1261,7 @@ a {
         max-width: 100%;
         font-size: 14px;
     }
-    
+
     .btn--submit::after {
         top: 150%;
         left: 50%;
@@ -1342,6 +1367,10 @@ a {
         height: 30px;
     }
 
+    .footer .logo {
+        margin-bottom: 30px;
+    }
+
     .footer__inner {
         flex-direction: column;
     }
@@ -1358,11 +1387,14 @@ a {
         align-items: stretch;
         justify-content: space-between;
         flex-wrap: wrap;
-        padding: 0;
     }
 
     .social {
         max-width: 100%;
+    }
+
+    .social .footer__title {
+        margin-top: 20px;
     }
 
     .social,
