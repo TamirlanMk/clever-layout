@@ -8,6 +8,16 @@ $('.portfolio-slider-center').slick({
   height: '500px',
   responsive: [
     {
+      breakpoint: 1300,
+      settings: {
+        arrows: true,
+        centerMode: true,
+        centerPadding: '20%',
+        slidesToShow: 1,
+        dots: true,
+      }
+    },
+    {
       breakpoint: 1170,
       settings: {
         arrows: true,
