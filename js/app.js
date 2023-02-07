@@ -1,45 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const portfolioSlider = new Swiper('.portfolio__slider', {
-    spaceBetween: 30,
-    slidesPerView: 'auto',
-    centeredSlides: true,
-    roundLengths: true,
-    loop: true,
-    loopAdditionalSlides: 30,
-    navigation: {
-      nextEl: ".slider-button-next",
-      prevEl: ".slider-button-prev"
-    },
-    pagination: {
-      el: ".slider-pagination",
-      clickable: true,
-    },
-    breakpoints: {
-      // when window width is >= 320px
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 20
-      },
-      // when window width is >= 480px
-      480: {
-        slidesPerView: 1,
-        spaceBetween: 20
-      },
-      // when window width is >= 640px
-      640: {
-        slidesPerView: 'auto',
-        spaceBetween: 30
-      }
-      , 1170: {
-        slidesPerView: 'auto',
-        spaceBetween: 30
-      }
-    }
-
-  });
-
-
   // Form Validation
   const formInputs = document.querySelectorAll('.form__input');
   const form = document.querySelector('.consult__form');
@@ -78,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     let hasEmpty = false;
     let formData = new FormData(form);
-    validationText.innerHTML = '';
 
     // Check Inputs value
     formInputs.forEach((input, i) => {
@@ -92,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // If Empty set error for validation
     if (hasEmpty) {
-      changeValidationStatus('Заполните отмеченые поля!', 'error')
+      if (!validationText.classList.contains('error')) changeValidationStatus('Заполните отмеченые поля!', 'error')
       return 0;
     }
 
@@ -112,10 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function changeValidationStatus(content, validClass) {
     validationText.classList.add(validClass);
-    validationText.innerHTML = content;
+    validationText.textContent = content;
 
     setTimeout(function () {
-      validationText.innerHTML = ''
+      validationText.textContent = ''
       validationText.classList.remove(validClass)
     }, 5000);
   }
@@ -181,11 +140,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   })
 
+  // const portfolioSlider = new Swiper('.portfolio__slider', {
+  //   spaceBetween: 30,
+  //   slidesPerView: 1,
+  //   centeredSlides: true,
+  //   roundLengths: true,
+  //   loop: true,
+  //   loopAdditionalSlides: 30,
+  //   navigation: {
+  //     nextEl: ".slider-button-next",
+  //     prevEl: ".slider-button-prev"
+  //   },
+  //   pagination: {
+  //     el: ".slider-pagination",
+  //     clickable: true,
+  //   },
+  //   breakpoints: {
+  //     // when window width is >= 320px
+  //     320: {
+  //       slidesPerView: 'auto',
+  //       spaceBetween: 20
+  //     },
+  //     // when window width is >= 480px
+  //     480: {
+  //       slidesPerView: 'auto',
+  //       spaceBetween: 20
+  //     },
+  //     // when window width is >= 640px
+  //     640: {
+  //       slidesPerView: 'auto',
+  //       spaceBetween: 30
+  //     },
+  //     1170: {
+  //       slidesPerView: 'auto',
+  //       spaceBetween: 30
+  //     }
+  //   }
+  // });
+
   // Modal with youtube video from swiper slider
   const modal = document.querySelector('#slider__modal')
   const modalContent = document.querySelector('#slider__modal .modal__inner')
   const modalCloseBtn = document.querySelector('#slider__modal .modal__close')
-  const slidesWithYoutube = document.querySelectorAll('.swiper-slide[data-youtube-id]')
+  const slidesWithYoutube = document.querySelectorAll('.portfolio-slider__slide[data-youtube-id]')
 
   modal.addEventListener('click', (e) => {
     let check = e.target.closest('.modal__inner')
@@ -193,19 +190,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!check) {
       closeModal()
     }
-
   })
 
   slidesWithYoutube.forEach(slide => {
     slide.addEventListener('click', (e) => {
       let youTubeVideoId = e.target.getAttribute('data-youtube-id');
 
-      if (!e.target.classList.contains('swiper-slide') && youTubeVideoId == null) {
-        youTubeVideoId = e.target.parentElement.getAttribute('data-youtube-id')
+      if (!e.target.classList.contains('slick-slide') && youTubeVideoId == null) {
+        youTubeVideoId = e.target.closest('.slick-slide').getAttribute('data-youtube-id')
       }
 
       let iframe = document.createElement('iframe');
-
       iframe.setAttribute('src', `https://www.youtube.com/embed/${youTubeVideoId}`)
       iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share')
       iframe.setAttribute('width', 800)
